@@ -1,0 +1,1 @@
+web gunicorn gamechat.wsgi:apllication --log-file -

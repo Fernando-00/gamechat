@@ -1,0 +1,125 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+
+  <main class="profile-page layout layout--3">
+    <div class="container">
+      <!-- Topics Start -->
+      {% include 'base/topics_component.html' %}
+      <!-- Topics End -->
+
+      <!-- Room List Start -->
+      <div class="roomList">
+        <div class="profile">
+          <div class="profile__avatar">
+            <div class="avatar avatar--large active">
+              <img src="{{user.avatar.url}}" />
+            </div>
+          </div>
+          <div class="profile__info">
+            <h3>{{user.username}}</h3>
+            <p>@{{user.username}}</p>
+            {% if request.user == user %}
+            <a href="{% url 'update-user' %}" class="btn btn--main btn--pill">Edit Profile</a>
+            
+            
+            {% endif %}
+          </div>
+
+          
+          
+            {% if request.user.steamadd == True %}
+            <div class="steam-title">
+
+              <h1>Recent Games Played on Steam</h1>
+              <p>Display Name On Steam: {{user.steamname}}</p>
+            </div>
+
+            
+
+            
+
+              {% if steam_count > 0 %}
+
+              <div class="steam">
+
+            
+            
+            
+                {% for game in steam_games %}
+                <div>
+
+                  <img src="{{game.gameImg.url}}"/>
+                  <h1>{{game.name}}</h1>
+                  <p>{{game.stat}}</p>
+                  
+                </div>
+                  
+                  
+                {% endfor %}
+
+              </div>
+
+              {% else %}
+
+                <div class="steam-none">
+                  <p>No Recent Steam Games In Past 2 Weeks</p>
+                </div>
+
+              {% endif %}
+
+              
+
+            
+
+            <div class="steam-options">
+
+              <div class="steam-update">
+                <a href="{% url 'update-steam' user.id%}" class="btn btn--main btn--pill">Update Steam Data</a>
+              </div>
+  
+              <div class="steam-delete">
+                <a href="{% url 'delete-steam' user.id%}" class="btn btn--main btn--pill">Delete Steam Data</a>
+              </div>
+
+            </div>
+
+            
+
+            {% else %}
+
+            <div class="steam-connect">
+              <a href="{% url 'steam' user.id%}" class="btn btn--main btn--pill">Connect To Steam</a>
+            </div>
+
+
+            {% endif %}
+            
+          
+          <div class="profile__about">
+            <h3>About</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur illo tenetur
+              facilis sunt nemo debitis quisquam hic atque aut? Ducimus alias placeat optio
+              accusamus repudiandae quis ab ex exercitationem rem?
+            </p>
+          </div>
+        </div>
+
+        <div class="roomList__header">
+          <div>
+            <h2>Study Rooms Hosted by dennis_ivy</a>
+            </h2>
+          </div>
+        </div>
+        {% include 'base/feed_component.html' %}
+      </div>
+      <!-- Room List End -->
+
+      <!-- Activities Start -->
+      {% include 'base/activity_component.html' %}
+      <!-- Activities End -->
+    </div>
+  </main>
+{% endblock content %}

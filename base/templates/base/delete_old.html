@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<form method="POST" action="">
+    <!-- token needed so no maliciuos activity is sent through -->
+    {% csrf_token %}
+    <!-- object is needed to delete multiple things -->
+    <p>Are you sure you want to delete "{{obj}}"</p>
+    <!-- request.META.HTTP.REFERER sends the user back to the previous page so that it could delete multiple things -->
+    <a href="{{request.META.HTTP_REFERER}}">Go Back</a>
+    <input type="submit" value="Confirm">
+</form>
+
+{% endblock content %}
