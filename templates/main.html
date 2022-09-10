@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="{% static 'styles/style.css' %}" />
+    
     <title>GameChat - Chat about your favourite games online!</title>
   </head>
 
@@ -15,11 +16,14 @@
     {% include 'navbar.html' %}
 
     {% if messages %}
-    <ul class="messages">
+    <div class="message-box">
+      <ul>
         {% for message in messages %}
-            <li>{{ message }}</li>
+            <li class="message">{{ message }}</li>
         {% endfor %}
     </ul>
+    </div>
+    
     {% endif %}
 
     {% block content %}
