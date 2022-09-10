@@ -1,1 +1,1 @@
-web gunicorn gamechat.wsgi:apllication --log-file -
+web: python manage.py migrate && gunicorn gamechat.wsgi
